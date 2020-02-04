@@ -23,6 +23,7 @@ point:
 /:division always returns a floating point number,To do floor division and get an integer result (discarding any fractional result) you can use the // operator; to calculate the remainder you can use %:
 /：除法运算符，// ：除法运算取整数，%：除法运算符取余数 
 """
+
 # print(17/3)
 # print(17 // 3)
 # print(17 % 3)
