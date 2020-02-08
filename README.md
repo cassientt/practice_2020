@@ -72,7 +72,10 @@ list中追加元素到末尾：classmates.append('Adam')
 list中把元素插入到指定的位置：classmates.insert(1, 'Jack')  
 list中删除list列表中末尾的元素：classmates.pop()  
 list中删除list列表中指定位置：i的元素：classmates.pop(i)  
-list中指定的某个元素替换成为别的元素，lists are a mutable type ,可以直接赋值给对应的索引位置：classmates[1] = 'Sarah'
+list中指定的某个元素替换成为别的元素，lists are a mutable type ,可以直接赋值给对应的索引位置：classmates[1] = 'Sarah'    
+只写[:]就可以原样复制一个list：  
+L[::5]  (以5为步调切片list/tuple/string)  
+[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
  
 另一种有序列表叫元组：tuple()，但tuple一旦初始化就不能修改【是说指向对象变化】
 因为tuple不可变，所以代码更安全  
@@ -175,12 +178,12 @@ http://docs.python.org/3/library/functions.html#abs
 
 ### 5.3 函数参数
 
-### 必选参数&默认参数
+### 5.3.1 必选参数&默认参数
 
 为什么要设计str、None这样的不变对象呢？因为不变对象一旦创建，对象内部的数据就不能修改，这样就减少了由于修改数据导致的错误。此外，由于对象不变，多任务环境下同时读取对象不需要加锁，同时读一点问题都没有。我们在编写程序时，如果可以设计一个不变对象，那就尽量设计成不变对象。
 
 
-### 可变参数：
+### 5.3.2 可变参数：
 ```python
 def calc(*numbers):
     sum = 0
@@ -189,9 +192,105 @@ def calc(*numbers):
     return sum
 ```
 允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。
-### 关键字参数：
+### 5.3.3 关键字参数：
 ```python
 def person(name, age, **kw):
-print(person('Bob', 35, city='Beijing'))
+    print('name:', name, 'age:', age, 'other:', kw)
+print(person('Adam', 45, gender='M', job='Engineer'))
 ```
 允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：
+### 5.3.4 命名关键字参数
+如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收city和job作为关键字参数。这种方式定义的函数如下：
+```python
+
+def person(name, age, *, city, job):
+    print(name, age, city, job)
+```
+和关键字参数**kw不同，命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。
+
+调用方式如下：
+
+```python
+
+person('Jack', 24, city='Beijing', job='Engineer')
+Jack 24 Beijing Engineer
+```
+如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符*了：
+```python
+def person(name, age, *args, city, job):
+    print(name, age, args, city, job)
+```
+### 5.3.5 参数组合
+在Python中定义函数，可以用必选参数、默认参数、可变参数、关键字参数和命名关键字参数，这5种参数都可以组合使用。但是请注意，参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数
+## 小结
+Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。
+
+默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！
+
+要注意定义可变参数和关键字参数的语法：
+
+*args是可变参数，args接收的是一个tuple；
+
+**kw是关键字参数，kw接收的是一个dict。
+
+以及调用函数时如何传入可变参数和关键字参数的语法：
+
+可变参数既可以直接传入：func(1, 2, 3)，又可以先组装list或tuple，再通过*args传入：func(*(1, 2, 3))；
+
+关键字参数既可以直接传入：func(a=1, b=2)，又可以先组装dict，再通过**kw传入：func(**{'a': 1, 'b': 2})。
+
+使用*args和**kw是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。
+
+命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。
+
+定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符*，否则定义的将是位置参数。
+# 高级
+### 迭代：Iteration
+如果给定一个list或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration），在Python中，迭代是通过for ... in来完成的。  
+当我们使用for循环时，只要作用于一个可迭代对象，for循环就可以正常运行，而我们不太关心该对象究竟是list还是其他数据类型。  
+那么，如何判断一个对象是可迭代对象呢？方法是通过collections模块的Iterable类型判断：
+
+```python 
+from collections import Iterable
+isinstance('abc', Iterable) # str是否可迭代
+True
+isinstance([1,2,3], Iterable) # list是否可迭代
+True
+isinstance(123, Iterable) # 整数是否可迭代
+False
+```
+最后一个小问题，如果要对list实现类似Java那样的下标循环怎么办？Python内置的enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身：
+
+```python
+ for i, value in enumerate(['A', 'B', 'C']):
+...     print(i, value)
+...
+0 A
+1 B
+2 C
+```
+### 列表生成器： List Comprehensions
+写列表生成式时，把要生成的元素x * x（或调用python的内置函数）放到前面，后面跟for循环，就可以把list创建出来，十分有用，多写几次，很快就可以熟悉这种语法。for循环后面还可以加上if判断
+
+### 生成器：generator 
+在Python中，这种一边循环一边计算的机制     
+凡是可作用于for循环的对象都是Iterable类型；  
+凡是可作用于next()函数的对象都是Iterator类型，它们表示一个惰性计算的序列；  
+集合数据类型如list、dict、str等是Iterable但不是Iterator，不过可以通过iter()函数获得一个Iterator对象。  
+Python的for循环本质上就是通过不断调用next()函数实现的，例如：
+# 函数式编程
+### 高阶函数：Higher-order function
+```python
+def add(x, y, f):
+    return f(x) + f(y)
+print(add(-5, 6, abs))
+```
+
+函数本身也可以赋值给变量，即：变量可以指向函数。
+把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
+
+### map()和reduce()函数
+### filter()
+filter()的作用是从一个序列中筛出符合条件的元素。由于filter()使用了惰性计算，所以只有在取filter()结果的时候，才会真正筛选并每次返回下一个筛出的元素。
+
+

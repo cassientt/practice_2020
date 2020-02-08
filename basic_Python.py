@@ -121,9 +121,29 @@
 # print(s1 & s2)
 # print(s1 | s2)
 # 调用函数
-x = abs(100)
-y = abs(-20)
-print(x, y)
-print('max(1, 2, 3) =', max(1, 2, 3))
-print('min(1, 2, 3) =', min(1, 2, 3))
-print('sum([1, 2, 3]) =', sum([1, 2, 3]))
+# x = abs(100)
+# y = abs(-20)
+# print(x, y)
+# print('max(1, 2, 3) =', max(1, 2, 3))
+# print('min(1, 2, 3) =', min(1, 2, 3))
+# print('sum([1, 2, 3]) =', sum([1, 2, 3]))
+
+# 切片
+# L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+
+# print('L[0:3] =', L[0:3])
+# print('L[:3] =', L[:3])
+# print('L[1:3] =', L[1:3])
+# print('L[-2:] =', L[-2:])
+
+# R = list(range(100))
+# print('R[:10] =', R[:10])
+# print('R[-10:] =', R[-10:])
+# print('R[10:20] =', R[10:20])
+# print('R[:10:2] =', R[:10:2])
+# print('R[::5] =', R[::5])
+# 高阶函数
+def add(x, y, f):
+    return f(x) + f(y)
+
+print(add(-5, 6, abs))
