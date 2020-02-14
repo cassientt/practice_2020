@@ -106,6 +106,34 @@ list(tuple)
 * 4,字典的操作
 ![字典的操作](../images/dict-operation.png)
 
+```python
+import json
+# # 将字典数据转换成JSON编码的字符串
+data = {'phone':'187499039310','type':1}
+json_str = json.dumps(data)
+print(json_str)
+print (type (json_str))
+
+# # 将Json编码的字符串转换成字典数据
+import json
+data = '{"phone":"2930-0-8-28340","type":1}'
+json_dict = json.loads(data)
+print (json_dict)
+print(type(json_dict))
+
+data = {'phone':'187499039310','type':1}
+# 判断字典中是否有key“in/not in dict”
+print('phone' in data)
+print('mobilephone'not in data)
+
+# 字典键值迭代器：获取一个字典中所有的键值对数据
+print(data.items()) #循环可遍历的（键，值）元组列表：dict_items([('phone', '187499039310'), ('type', 1)])
+for tuple_data in data.items():
+    print(tuple_data)# ('phone', '187499039310')  ('type', 1)
+for key ,value in data.items():#获取key和value元组的值
+    print (key,value) #phone 187499039310  type 1
+```
+
 # 4.重要基础
 ## 4.1.0 print 函数介绍
 ### 条件语句：IF and input() functoin
@@ -188,8 +216,12 @@ dict可以用在需要高速查找的很多地方，在Python代码中几乎无�
 
 dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是不可变对象。
 
-### 函数和方法的区别
+## 函数和方法的区别
 ![函数和方法的区别](../images/different-function-method.png)
+* 1,函数是光杆司令，👆没有”人“，但方法上面有人。
+* 2，函数可以直接使用，方法需要先把类实例化（类名称加括号），然后在实例化名称下再使用该方法。
+* 3，函数的参数是实打实的，需要几个就几个。方法总要多一个self，但又不用。
+* 共同点：参数但定义是相同的。
 # 5 Function（函数）
 ### 5.1 调用函数
 Python内置了很多有用的函数，我们可以直接调用。要调用一个函数，需要知道函数的名称和参数，比如求绝对值的函数abs，只有一个参数。可以直接从Python的官方网站查看文档：
@@ -207,7 +239,8 @@ http://docs.python.org/3/library/functions.html#abs
 ### 5.3.1 必选参数&默认参数
 
 为什么要设计str、None这样的不变对象呢？因为不变对象一旦创建，对象内部的数据就不能修改，这样就减少了由于修改数据导致的错误。此外，由于对象不变，多任务环境下同时读取对象不需要加锁，同时读一点问题都没有。我们在编写程序时，如果可以设计一个不变对象，那就尽量设计成不变对象。
-
+### 5.3.0 默认参数
+* 默认参数：在必选参数前。如果有多个参数把变化大的放在前面，变化小的放在后面，变化小的参数就可以做为默认参数。
 
 ### 5.3.2 可变参数：
 ```python
@@ -225,6 +258,9 @@ def person(name, age, **kw):
 print(person('Adam', 45, gender='M', job='Engineer'))
 ```
 允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：
+
+## 不同参数详解图
+![不同参数详解图](../images/different-parame.png)
 ### 5.3.4 命名关键字参数
 如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收city和job作为关键字参数。这种方式定义的函数如下：
 ```python
