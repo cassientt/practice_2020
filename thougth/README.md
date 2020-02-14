@@ -5,7 +5,9 @@
 在Unix下 `contral+D`  exit the interprete，在window OS 下使用 `contral+z` 
 or 使用 `quit()` 退出编辑器。
 
-在python交互模式下只适合临时调试，不能保存代码，不适合在此模式下写代码。要选择一个可以适用的编辑器：比如VSCode、Pycharm等。
+在python交互模式下只适合临时调试，不能保存代码，不适合在此模式下写代码。要选择一个可以适用的编辑器：比如VSCode、Pycharm等。    
+pytho是动态语言：这意味着变量并没有固定的类型。实际上，Python 中的变量和其他 语言有很大的不同，特别是静态类型语言。变量并不是计算机内存中被写入的某个值，它们 只是指向内存的 ‘标签’ 或 ‘名称’ 。
+
 ### 2.Number,string and operator
 ```python
 print('1024 * 768 =', 1024 * 768) 
@@ -26,6 +28,13 @@ print('%2d-%02d' % (3,1)) # 3-01
 print('%.2f' % 3.1415926) #3.14
 print('growth rate: %d %%' % 7) # growth rate: 7 %
 ```
+## Python 命名规则
+* 1，模块或包全部使用小写字母的命名方式，并且以_分隔单词。
+* 2，类或异常使用首字母大写的命名方式
+* 3，全局或类常量全部使用大写字母的命名方式，并且以_分隔单词。
+* 4，其余变量（包括方法名、函数名和普通变量名）则全部使用小写字母命名的方式。
+* 5，以上内容如果是Python内部的，则使用双下画线开头命名。
+
 变量在程序中就是用一个变量名表示了，变量名必须是大小写英文、数字和_的组合，且不能用数字开头.                                                                  python是动态语言：即变量本身类型不固定当语言。
 python中通常用大写的变量表示常量。
 
@@ -62,8 +71,9 @@ print(word[:-3] +word[-3:] ) #python
  ```
 
 ## 3.内置数据类型
+有序的集合：即有下标   
 Python内置数据类型：  
-List[]：是一种有序的集合，可以随时添加和删除其中的元素、支持索引和切片。    
+* List[]：是一种有序的集合，可以随时添加、删除、修改和查看其中的元素、支持索引和切片。    
 list中元素类型可以不同，元素页可以是另外一个list，但通常数据类型是相同的。    
 可以通过built-in function len()函数可以获得list元素的个数  
 使用索引访问list中每个元素的位置：list[len(classmates) - 1]=list[-1]  
@@ -77,11 +87,24 @@ list中指定的某个元素替换成为别的元素，lists are a mutable type 
 L[::5]  (以5为步调切片list/tuple/string)  
 [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
  
-另一种有序列表叫元组：tuple()，但tuple一旦初始化就不能修改【是说指向对象变化】
-因为tuple不可变，所以代码更安全  
+* 另一种有序列表叫元组：tuple()，但tuple一旦初始化就不能修改【是说指向对象变化】
+因为tuple不可变，所以代码更安全。元组本身虽然不支持修改但元组中但元素是可以修改但，比如元组中但一个数据是列表，则可以修改这个列表但数据。
+
 tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
 只有1个元素的tuple定义时必须加一个逗号,来消除数学公式中的小括号
-"""
+"""。
+
+```python
+列表和元组可以相互转变：
+tuple(list)
+list(tuple)
+```
+### 字典 ：{}  
+* 1，以键值对形式存储数据,字典数据随时灵活可变，支持增加、删除、修改、查找等操作。但字典但key必须是不可变的，即固定的数据，比如可以使用字符串，但不可以使用列表。
+* 2，涉及字典操作时，其key必须存在，如果key不存在，则会抛出‘keyError’
+* 3，不允许同一个键出现两次。如果同一个键被赋值两次，则前一个值会被覆盖。字典是无序的。
+* 4,![字典的操作](../images/dict-operation.png)
+
 # 4.重要基础
 ## 4.1.0 print 函数介绍
 ### 条件语句：IF and input() functoin
@@ -293,4 +316,105 @@ print(add(-5, 6, abs))
 ### filter()
 filter()的作用是从一个序列中筛出符合条件的元素。由于filter()使用了惰性计算，所以只有在取filter()结果的时候，才会真正筛选并每次返回下一个筛出的元素。
 
+### 匿名函数：lambda
+```python
+# def is_odd(n):
+#     return n % 2 == 1
 
+# L = list(filter(is_odd, range(1, 20)))
+# print(L)
+# 使用匿名函数
+L = list(filter(lambda x: x % 2 ==1, range(1, 20)))
+print(L)
+
+```
+关键字lambda表示匿名函数，冒号前面的x表示函数参数。  
+匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。  
+用匿名函数有个好处，因为函数没有名字，不必担心函数名冲突。此外，匿名函数也是一个函数对象，也可以把匿名函数赋值给一个变量，再利用变量来调用该函数：
+# 面向对象
+面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。  
+```python
+class Student(object):
+
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+
+    def print_score(self):
+        print('%s: %s' % (self.name, self.score))
+
+    def get_grade(self):
+        if self.score >= 90:
+            return 'A'
+        elif self.score >= 60:
+            return 'B'
+        else:
+            return 'C'
+
+bart = Student('Bart Simpson', 59)
+lisa = Student('Lisa Simpson', 87)
+
+print('bart.name =', bart.name)
+print('bart.score =', bart.score)
+bart.print_score()
+
+print('grade of Bart:', bart.get_grade())
+print('grade of Lisa:', lisa.get_grade())
+```
+类是创建实例的模板，而实例则是一个一个具体的对象，各个实例拥有的数据都互相独立，互不影响；  
+
+【对象是python最基本的单位，所有的事物都可以称为对象。“类”就是有特定属性（静态、动态）的一个基本组合】
+
+方法就是与实例绑定的函数，和普通函数不同，方法可以直接访问实例的数据；    
+通过在实例上调用方法，我们就直接操作了对象内部的数据，但无需知道方法内部的实现细节。   
+和静态语言不同，Python允许对实例变量绑定任何数据，也就是说，对于两个实例变量，虽然它们都是同一个类的不同实例，但拥有的变量名称都可能不同：
+
+```python
+class Student(object): #通过class关键字来定义类，class后面紧跟的是类名【通常类名首字母需要大写】
+    #‘object’表示该类是从那个类继承来的，如果没有合适的继承类就使用‘obgect’类，这是所有的类都会继承的类。
+    def __init__(self,name,score): #属性：静态数据
+        self.__name = name
+        self.score = score
+    def print_score(self): #方法：动态的处理函数
+        print('%s:%s'%(self.__name,self.score))
+
+pupil=Student(name='lili',score=99) #实例化类是在类名后面加（），类不可以被直接使用，只能先将其实例化，然后用实例代表类进而调用类中的方法处理数据
+pupil.print_score()
+# 类的访问权限：在类的外部不可以直接调用类中的数据。
+# 在python中，在变量前面加`__`可以将变量置为私有变量。使其只能在类中使用，不能被类之外的其它函数（方法）调用。
+
+# 继承
+class Parent(object):
+    def print_self(self):
+        return "我是父类"
+# 子类继承父类[方法直接在类名称的括号中加上父类的名称]：继承
+class Student(Parent):
+    def __init__(self,name,score):
+        self.__name = name
+        self.score = score
+    def print_score(self):
+        print('%s: %s' %(self.__name, self.__score))
+MaiMai = Student('hello',99)
+print(MaiMai.score)
+# 直接在子类中使用父类的方法
+print(MaiMai.print_self())
+
+
+# 类的多态：即如果子类继承了父类，又想改变父类的方法，则无需修改父类，只需要在子类中添加相同的方法名，就可以起到覆盖的作用。
+class Parent(object):
+    def print_self(self):
+        return "我是父类"
+# 子类继承父类
+class Student(Parent):
+    def __init__(self,name,score):
+        self.__name = name
+        self.score = score
+    def print_score(self):
+        print('%s: %s' %(self.__name, self.__score))
+    def print_self(self):
+        return "我是子类"
+MaiMai = Student('hello',99)
+print(MaiMai.score)
+# 直接在子类中使用父类的方法
+print(MaiMai.print_self())
+```
