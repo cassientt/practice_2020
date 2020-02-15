@@ -90,4 +90,11 @@ SQL注入防护
 ## 使用python操作MySQL
 见.rp文件中的流程图
 ## python 异常处理机制
-主要依靠内置异常处理和logging日志
+主要依靠内置异常处理和logging（python自带导入即可使用）日志
+### python 循环机制
+python 循环有两种：
+* 1，for...in关键字【in后面必须迭代体，比如：list、range（m）“test”】
+* 2，while关键字
+### python的垃圾回收机制
+reference counting(跟踪回收垃圾)-(mark-sweep)解决容器对象可能产生的循环引用问题 -generation collection (实现以空间换取时间)
+### 用python导出测试数据

@@ -28,6 +28,21 @@ print('%2d-%02d' % (3,1)) # 3-01
 print('%.2f' % 3.1415926) #3.14
 print('growth rate: %d %%' % 7) # growth rate: 7 %
 ```
+## 字符串的startswith()和endswith()方法
+* startswith()用于检测字符串是否以指定字符串开头，如果是，则返回Ture。
+* endswith()用于判断字符串是否以指定后缀结尾，如果是则返回True
+```python
+# str.startswith(str,Beg = 0,end=len(string))
+# str:要检测的字符串 Beg：可选参数，用于设置字符串检测的起始位置  end：可选参数，用于设置字符串的结束位置。
+# str.endswith(suffix[,start[,end]])
+# suffix：可以是一个字符串或者元素
+str = "this is string example....WOW!!!"
+print(str.startswith('this'))
+print(str.startswith('string',8))
+print(str.startswith('i',2,3))
+print(str.endswith('!!!'))
+print(str.endswith('h',0,1))
+```
 ## Python 命名规则
 * 1，模块或包全部使用小写字母的命名方式，并且以_分隔单词。
 * 2，类或异常使用首字母大写的命名方式
@@ -37,13 +52,23 @@ print('growth rate: %d %%' % 7) # growth rate: 7 %
 
 变量在程序中就是用一个变量名表示了，变量名必须是大小写英文、数字和_的组合，且不能用数字开头.                                                                  python是动态语言：即变量本身类型不固定当语言。
 python中通常用大写的变量表示常量。
-
+# 使用print格式化输出
 格式化：字符串中的有些字段是根据变量变化的，所以需要一种简便的格式化字符串的方式
-在Python中，采用的格式化方式和C语言是一致的，用%实现。
-%%：表示一个%    
-%d：整数                                                                %f:浮点数  
-%x：16进制整数
-
+在Python中，采用的格式化方式和C语言是一致的，用%操作符和format函数实现。
+* %%：表示一个%    
+* %d：整数                                                    
+* %f:浮点数  
+* %x：16进制整数
+```python
+print('{} {}'.format('hello','world'))
+ #不带数字  hello world
+print('{0} {1}'.format('hello','world'))
+#带数字编号  hello world
+print('{0} {1} {0}'.format('hello','world'))
+#打乱顺序 hello world hello
+print('{a} {tom} {a}'.format(tom='hello',a='world'))
+#带关键字 world hello world
+```
 ```python
 print(3*'un' +'ium') 
 #：unununium 字符串通过+拼接，通过*重复
@@ -91,9 +116,16 @@ L[::5]  (以5为步调切片list/tuple/string)
 因为tuple不可变，所以代码更安全。元组本身虽然不支持修改但元组中但元素是可以修改但，比如元组中但一个数据是列表，则可以修改这个列表但数据。
 
 tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
-只有1个元素的tuple定义时必须加一个逗号,来消除数学公式中的小括号
-"""。
+只有1个元素的tuple定义时必须加一个逗号,来消除数学公式中的小括号。  
+## 和list比较，dict有以下几个特点：
+查找和插入的速度极快，不会随着key的增加而变慢；需要占用大量的内存，内存浪费多。而list相反：查找和插入的时间随着元素的增加而增加；占用空间小，浪费内存很少。所以，dict是用空间来换取时间的一种方法。
 
+dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常要，需要牢记的第一条就是dict的key必须是不可变对象。和list比较，dict有以下几个特点：
+查找和插入的速度极快，不会随着key的增加而变慢；需要占用大量的内存，内存浪费多。而list相反：
+
+查找和插入的时间随着元素的增加而增加；占用空间小，浪费内存很少。所以，dict是用空间来换取时间的一种方法。
+
+dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是不可变对象
 ```python
 列表和元组可以相互转变：
 tuple(list)
@@ -133,7 +165,24 @@ for tuple_data in data.items():
 for key ,value in data.items():#获取key和value元组的值
     print (key,value) #phone 187499039310  type 1
 ```
+## eval()与instance()方法
+```python
+import json
+data = '{"phone":"2930-0-8-28340","type":1}'
+json_dict = eval(data)
+print (json_dict)
+print(type(json_dict))
+```
+* eval()方法是将字符串当成有效的python表达式来求值。即实现list、tuple、dict、和string之间的转换。与json.loads方法类似。
 
+```python 
+import json
+data2 = {"phone":"218293781870340","type":1}
+print(isinstance(data2,(dict,list))) 
+print(isinstance(data2,list)) #False
+print(isinstance(data2,dict))
+```
+* instance()方法用于判断参数的类型是否在给定的类型之中，其支持多个类型，返回的结果是布尔类型。
 # 4.重要基础
 ## 4.1.0 print 函数介绍
 ### 条件语句：IF and input() functoin
@@ -184,7 +233,7 @@ break语句可以在循环过程中直接退出循环，而continue语句可以�
 要特别注意，不要滥用break和continue语句。break和continue会造成代码执行逻辑分叉过多，容易出错。大多数循环并不需要用到break和continue语句，上面的两个例子，都可以通过改写循环条件或者修改循环逻辑，去掉break和continue语句。
 
 有些时候，如果代码写得有问题，会让程序陷入“死循环”，也就是永远循环下去。这时可以用Ctrl+C退出程序，或者强制结束Python进程。
-## 4.1.3 dict和set
+## 4.1.3 dict和set()、issubset()
 
 ```python
 d = {
@@ -198,23 +247,24 @@ print('d[\'Tracy\'] =', d['Tracy'])
 print('d.get(\'Thomas\', -1) =', d.get('Thomas', -1)) 
 # 通过dict提供的get()方法，如果key不存在，可以返回None，或者自己指定的value
 # 要删除一个key，用pop(key)方法，对应的value也会从dict中删除： 
-s1 = set([1, 1, 2, 2, 3, 3])
-print(s1)
-s2 = set([2, 3, 4])
-print(s1 & s2)
-print(s1 | s2)
 # s.remove/sort/add()
 ```
-和list比较，dict有以下几个特点：
+### set()与issubset()方法
 
-查找和插入的速度极快，不会随着key的增加而变慢；需要占用大量的内存，内存浪费多。而list相反：查找和插入的时间随着元素的增加而增加；占用空间小，浪费内存很少。所以，dict是用空间来换取时间的一种方法。
+```python
+s1 = set([1, 1, 2, 2, 3, 3])
+print(s1) #{1, 2, 3}
+s2 = set([2, 3, 4])
+print(s1 & s2) #{2, 3}
+print(s1 | s2) # {1, 2, 3, 4}
+```
+* set()方法将列表转换为集合，去除重复数据，实现唯一性。
+```python
+print (set ([1,2,3,4]).issubset(set([1,2]))) #False
+print (set ([3,4]).issubset(set([1,2,3,4]))) #True
+```
+* issubset()判断两个集合之间是否有包含关系。全部包含返回True，否则返回False。
 
-dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常要，需要牢记的第一条就是dict的key必须是不可变对象。和list比较，dict有以下几个特点：
-查找和插入的速度极快，不会随着key的增加而变慢；需要占用大量的内存，内存浪费多。而list相反：
-
-查找和插入的时间随着元素的增加而增加；占用空间小，浪费内存很少。所以，dict是用空间来换取时间的一种方法。
-
-dict可以用在需要高速查找的很多地方，在Python代码中几乎无处不在，正确使用dict非常重要，需要牢记的第一条就是dict的key必须是不可变对象。
 
 ## 函数和方法的区别
 ![函数和方法的区别](../images/different-function-method.png)
