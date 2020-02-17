@@ -20,4 +20,4 @@
 * 我们可以通过skip，skipIf，skipUnless装饰器跳过某个case，或者用TestCase.skipTest方法。
 * 参数中加stream，可以将报告输出到文件：可以用TextTestRunner输出txt报告，以及可以用HTMLTestRunner输出html报告。
 # unittest 框架图
-![unittest 框架图]（../images/website/unittest.png）
+![unittest 框架图](../images/website/unittest.png)
