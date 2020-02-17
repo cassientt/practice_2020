@@ -76,11 +76,10 @@ SQL注入防护
 6，检测sql注入一般采用软件或网站平台：软件一般采用SQL注入检测工具Jsky；网站平台一般采用亿思网站安全平台检测工具、MDCSOFT SCAN等。
 
 逻辑校验：即本项目的业务逻辑
-![逻辑验证功能点](../images/logic-validation-assert.jpeg)
+![逻辑验证功能点](../images/book1/logic-validation-assert.jpeg)
 接口测试用例模版  
-![接口用例模版1](../images/request-case1.jpeg)  
-![接口用例模版2](../images/request-case2.jpeg
-
+![接口用例模版1](../images/book1/request-case1.jpeg)  
+![接口用例模版2](../images/book1/request-case2.jpeg)
 ## Python
 - 解释器  
 在python执行的过程中，解释器起着“翻译”的作用，它把python 代码编译成能被机器识别的内容。最常用的是“CPython”  

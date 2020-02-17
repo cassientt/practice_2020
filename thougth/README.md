@@ -136,7 +136,7 @@ list(tuple)
 * 2，涉及字典操作时，其key必须存在，如果key不存在，则会抛出‘keyError’
 * 3，不允许同一个键出现两次。如果同一个键被赋值两次，则前一个值会被覆盖。字典是无序的。
 * 4,字典的操作
-![字典的操作](../images/dict-operation.png)
+![字典的操作](../images/book1/dict-operation.png)
 
 ```python
 import json
@@ -267,7 +267,7 @@ print (set ([3,4]).issubset(set([1,2,3,4]))) #True
 
 
 ## 函数和方法的区别
-![函数和方法的区别](../images/different-function-method.png)
+![函数和方法的区别](../images/book1/different-function-method.png)
 * 1,函数是光杆司令，👆没有”人“，但方法上面有人。
 * 2，函数可以直接使用，方法需要先把类实例化（类名称加括号），然后在实例化名称下再使用该方法。
 * 3，函数的参数是实打实的，需要几个就几个。方法总要多一个self，但又不用。
@@ -310,7 +310,7 @@ print(person('Adam', 45, gender='M', job='Engineer'))
 允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict。请看示例：
 
 ## 不同参数详解图
-![不同参数详解图](../images/different-parame.png)
+![不同参数详解图](../images/book1/different-parame.png)
 ### 5.3.4 命名关键字参数
 如果要限制关键字参数的名字，就可以用命名关键字参数，例如，只接收city和job作为关键字参数。这种方式定义的函数如下：
 ```python
