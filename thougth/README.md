@@ -412,14 +412,23 @@ filter()的作用是从一个序列中筛出符合条件的元素。由于filter
 
 # L = list(filter(is_odd, range(1, 20)))
 # print(L)
-# 使用匿名函数
+# 使用匿名函数：lambda params:expr(表达式)
 L = list(filter(lambda x: x % 2 ==1, range(1, 20)))
 print(L)
+# [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 
+import math
+s = lambda x1, y1, x2, y2: math.sqrt((x1-x2)**2+(y1-y2)**2)
+print(s(1,1,0,0))
+
+alst=[0,1,2,3,4]
+print(list(filter(lambda x: x % 2,alst))) # [1,3]  lambda函数过滤掉被2整除的数。 
+print(list(map(lambda x: 2*x,alst)))  #[0, 2, 4, 6, 8]
+print(isinstance('abc',str))  # True
 ```
 关键字lambda表示匿名函数，冒号前面的x表示函数参数。  
 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。  
-用匿名函数有个好处，因为函数没有名字，不必担心函数名冲突。此外，匿名函数也是一个函数对象，也可以把匿名函数赋值给一个变量，再利用变量来调用该函数：
+用匿名函数有个好处，因为函数没有名字，不必担心函数名冲突。此外，匿名函数也是一个函数对象，也可以把匿名函数赋值给一个变量，再利用变量来调用该函数：即简单匿名函数、不复用的函数、为了代码清晰
 # 面向对象
 面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。  
 ```python
