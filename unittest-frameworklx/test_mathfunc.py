@@ -1,6 +1,6 @@
 import unittest
 from mathfunc import *
-
+# 使用测试用例组成类
 
 class TsetMathFunc(unittest.TestCase):
     """ Test mathfunc.py """

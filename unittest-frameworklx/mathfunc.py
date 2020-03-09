@@ -9,3 +9,6 @@ def multi(a,b):
 
 def divide(a,b):
     return a/b
+
+
+# 单个组合测试用例
