@@ -42,12 +42,12 @@ All process 、WebBrowser、 Non_Browser
 3，获取手机端的网络数据包   
 Fiddler可以获取APP数据请求的原因是：Fiddler是代理服务器。
 配置代理的方法：
-*1，手机连接的Wi-Fi和电脑在同一个网段。  
-*2，fiddler设置为支持移动端连接：connections中勾选允许远程、监听端口：8888.单击“确定”按钮，重新启动fiddler。  
-*3，cmd->"netstat-anop tcp"查看fiddler工具进程是否可以正常监听8888端口。   
+* 1，手机连接的Wi-Fi和电脑在同一个网段。  
+* 2，fiddler设置为支持移动端连接：connections中勾选允许远程、监听端口：8888.单击“确定”按钮，重新启动fiddler。  
+* 3，cmd->"netstat-anop tcp"查看fiddler工具进程是否可以正常监听8888端口。   
    ipconfig->IPv4查看本机IP。   
-*4，设置手机网络代理：IP及端口一致。   
-*5，验证访问。  
+* 4，设置手机网络代理：IP及端口一致。   
+* 5，验证访问。  
 注意：  
 @1，测试完成关闭手机代理  
 @2，在手机端抓包分析时可以让“Capturing”不显示。这样Fiddler就只显示主动发起的请求，而不会截取手机端所有的请求包。  

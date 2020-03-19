@@ -1,4 +1,4 @@
-## 0.数据库常识
+# 0.数据库常识
 ### SQL 是用于访问和处理数据库的标准的计算机语言。(结构化查询语言,使我们有能力访问数据库)
 ## 重要事项
 * SQL 对大小写不敏感
@@ -35,7 +35,7 @@ SQL 的数据定义语言 (DDL) 部分使我们有能力创建或删除表格。
 * DROP TABLE - 删除表
 * CREATE INDEX - 创建索引（搜索键）
 * DROP INDEX - 删除索引
-##  0.1.0 数据库基础
+#  0.1.0 数据库基础
 ###  0.1.1 SQL SELECT 语句
 SELECT 语句用于从表中选取数据。结果被存储在一个结果表中（称为结果集）。
 ```sql
@@ -133,7 +133,9 @@ DELETE * FROM table_name
 ```
 
 
-## 1. SQL函数
+
+# 1 SQL函数
+###  1. SQL函数
 * SQL 拥有很多可用于计数和计算的内建函数。
 ```sql
 内建函数的语法：
@@ -319,6 +321,72 @@ column_name | 必需。要格式化的字段。
 format | 必需。规定格式
 
 
+# 2 SQL 高级部分
+## 2.1.1 SQL TOP 子句
+* TOP 子句用于规定要返回的记录的数目。对于拥有数千条记录的大型表来说，TOP 子句是非常有用的。
+
+注释：并非所有的数据库系统都支持 TOP 子句。
+```sql
+SQL Server 的语法：
+SELECT TOP number|percent column_name(s)
+FROM table_name
+example: 
+SELECT TOP 2 * FROM Persons
+SELECT TOP 50 PERCENT * FROM Persons
+```
+## 2.1.2 SQL LIKE 操作符
+* LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式。
+* LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式。
+```sql
+SQL LIKE 操作符语法:
+SELECT column_name(s)
+FROM table_name
+WHERE column_name LIKE pattern
+```
+## 2.1.3 SQL 通配符
+* 在搜索数据库中的数据时，SQL 通配符可以替代一个或多个字符。
+* SQL 通配符必须与 LIKE 运算符一起使用。
+####  在 SQL 中，可使用以下通配符：
+
+通配符 | 描述
+------|------
+% | 替代一个或多个字符
+_ | 仅替代一个字符
+[charlist] | 字符列中的任何单一字符
+[^charlist]或者[!charlist] | 不在字符列中的任何单一字符
+## 2.1.4 SQL IN 操作符
+IN 操作符允许我们在 WHERE 子句中规定多个值。
+```sql
+SQL IN 语法:
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1,value2,...)
+```
+## 2.1.5 BETWEEN 操作符在 
+* BETWEEN 操作符在 WHERE 子句中使用，作用是选取介于两个值之间的数据范围。
+* 操作符 BETWEEN ... AND 会选取介于两个值之间的数据范围。这些值可以是数值、文本或者日期。
+```sql
+SQL BETWEEN 语法:
+SELECT column_name(s)
+FROM table_name
+WHERE column_name
+BETWEEN value1 AND value2
+```
+## 2.1.6 SQL Alias
+通过使用 SQL，可以为列名称和表名称指定别名（Alias）。
+```sql
+表的 SQL Alias 语法
+SELECT column_name(s)
+FROM table_name
+AS alias_name
+列的 SQL Alias 语法
+SELECT column_name AS alias_name
+FROM table_name
+```
+
+
+
+
 
 
 ## 数据库连接
@@ -389,3 +457,5 @@ ALTER COLUMN column_name datatype
 * DBMS - 数据库管理系统（Database Management System）
 数据库管理系统是一种可以访问数据库中数据的计算机程序。
 * DBMS 使我们有能力在数据库中提取、修改或者存贮信息。不同的 DBMS 提供不同的函数供查询、提交以及修改数据。
+
+
