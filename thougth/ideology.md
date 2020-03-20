@@ -58,6 +58,23 @@ Fiddler可以获取APP数据请求的原因是：Fiddler是代理服务器。
 @1，辅助录制接口请求
 @2，模拟低速网络环境：“Rules”-"Performance"-"Simulate" Modem Speeds
 
+## 9.4.5 Fiddler
+Fiddler是一个HTTP的调试代理工具，它以代理服务器的方式，监听系统的HTTP网络数据，俗称抓包工具。
+###  Fiddler抓取接口
+* 配置Fiddler首先启动Fiddler，在启动页面中单击“Tools”→“Options”
+* 在弹出Options页面中，单击“Connections”选项，勾选“Allow remote computers to con-nect”，再单击“OK”按钮，如图9-15所示。
+* 配置手机首先设置手机（vivo为例）进入开发者模式，进入手机“设置”→“关于手机”→连续点击“软件版本号”，出现提示“您已处于开发者模式”，如图9-16所示。
+* 然后进入“开发者选项”→启用“USB调试”，如图9-17所示。
+* 最后进入手机“设置”→选择“Wlan”→选择“wifi”→进入高级设置选项→选择手动代理，将“代理服务器主机名”改为连接手机电脑的IP地址，再将“端口”修改为8888。
+
+### Fiddler模拟弱网
+Fiddler还提供了一个很方便的网络限速功能，通过网络限速，可以模拟用户的一些真实环，也就是模拟弱网的环境进行APP测试。
+#### Fiddler模拟弱网需要设置延时的时间，算法为：
+* 需要延时的时间（毫秒）=8*1000/网络速度。比如模拟2G网络（上行速度为2.7KB/s，下行速度为9.6KB/s）的速度，其计算方法如下：上行时延为8*1000/2.7=2962ms，下行时延为8*1000/9.6=833ms。
+* 在Fiddler里面具体设置步骤如下：首先启动Fiddler在菜单栏Rules下→单击“Customize Rules...”选项
+* 其次在弹出的“Fiddler ScriptEditor”页面中，搜索“m SimulateModem”字段，然后修改下面2行数据
+* oSession[＂request-trickle-delay＂]=＂300＂；中的300改为2962oSession[＂request-trickle-delay＂]=＂150＂；中的150改为833，保存。最后修改完延时后，在Fiddler界面中，选择“Rules”→“Performances”→“Simulate ModemSpeeds”，勾选该项即可.
+
 ## 接口测试用例
 接口 测试的设计包含两个维度：参数校验、逻辑校验
 ### 参数校验
