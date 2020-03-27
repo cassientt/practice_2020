@@ -1,4 +1,4 @@
-# practice_2020
+### python 从入门到实践
 
 * Windows要关闭该终端会话，可按Ctrl+Z，（command+D）再按回车键，也可执行命令exit()。
 
